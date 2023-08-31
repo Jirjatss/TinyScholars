@@ -17,16 +17,16 @@
       <div class="hero-content flex-col lg:flex-row">
         <div class="ms-5">
           <h1 class="text-7xl font-bold font-[satisfy]">TinyScholars</h1>
-          <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <p class="py-6 font-mono">Empowering Young Minds, One Course at a Time with TinyScholars .</p>
           <div class="flex">
             <% if (!userRole) { %>
-            <a href="/login" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">Login</a>
-            <a href="/register" class="px-3 py-1.5 bg-red-500 rounded-lg text-white">Register</a>
+            <a href="/login" class="px-3 py-1.5 bg-red-400 rounded-lg text-white me-2">Login</a>
+            <a href="/register" class="px-3 py-1.5 bg-red-400 rounded-lg text-white">Register</a>
             <% } else if (userRole === 'Parent') { %>
-            <a href="/student-list" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Students</a>
+            <a href="/student-list" class="px-3 py-1.5 bg-red-400 rounded-lg text-white me-2">View Students</a>
             <% } else if (userRole === 'Student') { %>
-            <a href="/course" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Courses</a>
-            <a href="/transaction/<%= userId %>" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Transactions</a>
+            <a href="/course" class="px-3 py-1.5 bg-red-400 rounded-lg text-white me-2">View Courses</a>
+            <a href="/transaction/<%= userId %>" class="px-3 py-1.5 bg-red-400 rounded-lg text-white me-2">View Transactions</a>
             <% } %>
           </div>
         </div>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body class="bg-white text-black h-screen">
+    <%- include('../partials/navbar', {userRole, userId, userImage}) %>
+    <h1 class="text-4xl font-mono text-center py-10"><%= userProfile.getGreeting() %> Profile</h1>
+
+    <div class="flex">
+      <div class="m-auto text-center">
+        <img src="<%= userProfile.imageUrl %>" class="m-auto w-56 h-56 mb-5" />
+        <div class="grid grid-rows gap-y-2">
+          <p class="text-center"><strong>Full Name:</strong> <%= userProfile.fullName %></p>
+
+          <p><strong>Address:</strong> <%= userProfile.address %></p>
+          <p><strong>Gender:</strong> <%= userProfile.gender %></p>
+          <p><strong>Phone Number:</strong> <%= userProfile.phone %></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

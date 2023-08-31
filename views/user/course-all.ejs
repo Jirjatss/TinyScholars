@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body class="bg-white text-black">
+    <%- include('../partials/navbar', {userRole}) %> <% if (error) { %>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    </script>
+    <% } %>
+    <h1 class="text-4xl py-10 font-mono text-center font-semibold">TinyScholars | Courses</h1>
+    <div class="mx-24 flex space-x-4 py-10">
+      <form action="/course" method="GET" class="place-items-start">
+        <input type="text" name="search" placeholder="Search By Course" class="px-3 py-2 bg-white border text-center rounded" />
+        <select name="schedule" class="px-3 py-2 bg-white border rounded">
+          <option value="">All Schedule</option>
+          <option value="Pagi">Morning</option>
+          <option value="Siang">Afternoon</option>
+          <option value="Malam">Evening</option>
+        </select>
+        <button type="submit" class="px-3 py-2 bg-red-400 border text-center rounded text-white">Search</button>
+      </form>
+      <div>
+        <select class="text-center px-3 py-2 bg-red-400 text-white border rounded" onchange="redirectToSelectedOption(this)">
+          <option disabled selected>Sort By</option>
+          <option data-url="/course?sort=asc">Sort from Cheapest</option>
+          <option data-url="/course?sort=desc">Sort from Most Expensive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto mx-24 pb-10">
+      <table class="table">
+        <thead>
+          <tr class="text-black">
+            <th>No.</th>
+            <th>Course</th>
+            <th>Start Date</th>
+            <th>Schedule</th>
+            <th>Price</th>
+            <th>Instructor</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% courses.forEach((course, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= course.name %></td>
+            <td><%= formatDate(course.courseDate) %></td>
+            <td><%= course.schedule %></td>
+            <td><%= formatCurrency(course.price) %></td>
+            <td>
+              <% course.Instructors.forEach((instructor) => { %> <%= instructor.name %><br />
+              <% }) %>
+            </td>
+            <td>
+              <a href="/course/<%= course.id %>/detail" class="px-6 py-1 bg-green-800 text-white border rounded">Detail</a>
+              <a href="/course/<%= course.id %>/book" class="px-8 py-1 bg-blue-800 text-white border rounded">Buy</a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      function redirectToSelectedOption(selectElement) {
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var targetUrl = selectedOption.getAttribute("data-url");
+
+        if (targetUrl) {
+          window.location.href = targetUrl;
+        }
+      }
+    </script>
+  </body>
+</html>

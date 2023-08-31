@@ -15,13 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Transaction.init(
     {
       UserId: DataTypes.INTEGER,
-      CourseId: {
-        type: DataTypes.INTEGER,
-        unique: {
-          args: true,
-          msg: "You have already booked this course.",
-        },
-      },
+      CourseId: DataTypes.INTEGER,
       transactionCourse: DataTypes.STRING,
       transactionCourseDate: DataTypes.DATE,
       transactionStatus: DataTypes.STRING,

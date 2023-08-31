@@ -12,15 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     getGreeting() {
-        if (this.gender === 'Male') {
-          return `Siswa ${this.fullName}`
-        } else if (this.gender === 'Female') {
-          return `Siswi ${this.fullName}`
-        } else {
-          return ''
-        }
+      let salutation = "";
+      if (this.gender === "Male") {
+        salutation = "Mr.";
+      } else if (this.gender === "Female") {
+        salutation = "Ms.";
+      }
+      return `${salutation} ${this.fullName}`;
     }
-
   }
   UserProfile.init(
     {

@@ -14,48 +14,46 @@ class AuthController {
 
   static postLogin(req, res) {
     const { email, password } = req.body;
-    let userId = 0;
-    let userPassword = "";
-    User.findOne({
-      where: {
-        email: email,
-      },
-    })
-      .then((user) => {
-        if (user) {
-          userPassword = user.password;
-          userId = user.id;
-          console.log(userId);
-          req.session.userId = user.id;
-          req.session.userRole = user.role;
-          return UserProfile.findOne({
-            where: {
-              UserId: user.id,
-            },
-          });
-        } else {
-          let errors = "Email/Password not match!";
-          return res.redirect(`/login?error=${errors}`);
-        }
+    let errors = [];
+    if (!email) {
+      errors.push("Email required");
+    }
+    if (!password) {
+      errors.push("Password required");
+    }
+    if (errors.length > 0) {
+      return res.redirect(`/login?error=${errors}`);
+    } else {
+      User.findOne({
+        where: {
+          email: email,
+        },
+        include: UserProfile,
       })
-      .then((result) => {
-        if (result) {
-          req.session.userImage = result.imageUrl;
-          let isValUser = bcrypt.compareSync(password, userPassword);
-          if (isValUser) {
-            res.redirect("/");
-          } else {
+        .then((user) => {
+          if (user) {
+            let isValUser = bcrypt.compareSync(password, user.password);
+            if (isValUser) {
+              req.session.userId = user.id;
+              req.session.userRole = user.role;
+              if (user.UserProfile) {
+                req.session.userImage = user.UserProfile.imageUrl;
+                return res.redirect("/");
+              } else {
+                return res.redirect(`/profile/${user.id}/add`);
+              }
+            }
             let errors = "Email/Password not match!";
             return res.redirect(`/login?error=${errors}`);
           }
-        } else {
-          return res.redirect(`/profile/${userId}/add`);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send(err);
-      });
+          let errors = "Email/Password not match!";
+          return res.redirect(`/login?error=${errors}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.send(err);
+        });
+    }
   }
   static register(req, res) {
     const { error } = req.query;
@@ -65,7 +63,7 @@ class AuthController {
     const { email, password, role } = req.body;
     User.create({ email, password, role })
       .then((_) => {
-        res.redirect("/");
+        res.redirect("/login");
       })
       .catch((err) => {
         if (err.name === "SequelizeValidationError") {
