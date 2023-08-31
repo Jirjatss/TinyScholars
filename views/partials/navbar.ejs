@@ -1,3 +1,27 @@
-<div class="navbar bg-red-400 text-white">
-  <a class="btn btn-ghost normal-case text-xl font-[satisfy]" href="/">TinyScholars</a>
+<div class="navbar bg-red-400 text-white px-8">
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl" href="/">daisyUI</a>
+  </div>
+  <div class="flex-none">
+    <% if (userRole) { %>
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img src="https://disdik.purwakartakab.go.id/asset/foto_berita/IMG_20220104_1018191.jpg" />
+        </div>
+      </label>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+    <% } else { %>
+    <a href="/login" class="font-mono">Login</a>
+    <% } %>
+  </div>
 </div>
