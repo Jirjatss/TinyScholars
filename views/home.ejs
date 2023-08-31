@@ -26,6 +26,7 @@
             <a href="/student-list" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Students</a>
             <% } else if (userRole === 'Student') { %>
             <a href="/course" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Courses</a>
+            <a href="/transaction/<%= userId %>" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Transactions</a>
             <% } %>
           </div>
         </div>

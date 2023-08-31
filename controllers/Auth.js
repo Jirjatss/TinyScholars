@@ -4,8 +4,8 @@ let bcrypt = require("bcryptjs");
 class AuthController {
   static home(req, res) {
     const { error } = req.query;
-    const { userRole } = req.session;
-    res.render("home", { error, userRole });
+    const { userRole, userId } = req.session;
+    res.render("home", { error, userRole, userId });
   }
   static login(req, res) {
     const { error } = req.query;

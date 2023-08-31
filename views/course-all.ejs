@@ -45,9 +45,9 @@
         <tr>
           <td><%= index + 1 %></td>
           <td><%= course.name %></td>
-          <td><%= course.courseDate %></td>
+          <td><%= formatDate(course.courseDate) %></td>
           <td><%= course.schedule %></td>
-          <td><%= course.price %></td>
+          <td><%= formatCurrency(course.price) %></td>
           <td>
             <% course.Instructors.forEach((instructor) => { %> <%= instructor.name %><br />
             <% }) %>

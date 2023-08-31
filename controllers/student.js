@@ -1,5 +1,7 @@
 const { Course, Instructor, User, UserProfile, Transaction } = require("../models");
 const { Op } = require("sequelize");
+const formatDate = require("../helpers/format-date");
+const formatCurrency = require("../helpers/format-currency");
 
 class Student {
   static viewCourse(req, res) {
@@ -27,7 +29,7 @@ class Student {
       include: Instructor,
     })
       .then((courses) => {
-        res.render("course-all", { courses, error, userRole });
+        res.render("course-all", { courses, error, userRole, formatDate, formatCurrency });
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +43,7 @@ class Student {
       include: Instructor,
     })
       .then((course) => {
-        res.render("course-detail", { course });
+        res.render("course-detail", { course, formatCurrency });
       })
       .catch((err) => {
         console.log(err);
@@ -135,7 +137,7 @@ class Student {
       include: [Transaction, UserProfile],
     })
       .then((student) => {
-        res.render("./student/transactions", { userRole, student });
+        res.render("./student/transactions", { userRole, student, formatDate, formatCurrency });
       })
       .catch((err) => {
         console.log(err);
@@ -145,6 +147,38 @@ class Student {
 
   static deleteCourse(req, res) {
     res.send("deleteCourse");
+  }
+  static attend(req, res) {
+    const { transactionId } = req.params;
+    const { userId } = req.session;
+
+    Transaction.findByPk(transactionId)
+      .then((transaction) => {
+        return transaction.update({ transactionStatus: "Attend" });
+      })
+      .then(() => {
+        res.redirect(`/transaction/${userId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      });
+  }
+  static cancel(req, res) {
+    const { transactionId } = req.params;
+    const { userId } = req.session;
+
+    Transaction.findByPk(transactionId)
+      .then((transaction) => {
+        return transaction.destroy();
+      })
+      .then(() => {
+        res.redirect(`/transaction/${userId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      });
   }
 }
 module.exports = Student;
