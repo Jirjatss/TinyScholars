@@ -1,0 +1,37 @@
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body class="bg-white text-black">
+    <%- include('../partials/navbar', {userRole}) %>
+    <div class="mx-24">
+      <h1 class="text-3xl font-mono text-center font-semibold py-10">Transaction <%= student.email %></h1>
+      <div class="overflow-x-auto mx-44">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nama Pelajaran</th>
+              <th>Tanggal</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% student.Transactions.forEach(e => { %>
+            <tr>
+              <td><%= e.transactionCourse %></td>
+              <td><%= e.transactionCourseDate %></td>
+              <td><%= e.transactionStatus %></td>
+              <td>
+                <% if (e.transactionCourseDate < new Date()) { %>
+                <a href="" class="px-4 py-1 bg-blue-600 text-white border rounded">Hadir</a>
+                <% } else { %>
+                <a href="" class="px-3 py-1 bg-red-800 text-white border rounded">Cancel</a>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
