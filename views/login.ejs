@@ -1,14 +1,24 @@
 <html lang="en">
   <%- include('./partials/head') %>
-  <body class="bg-white text-black">
+  <body class="bg-white text-black pb-5">
     <%- include('./partials/navbar') %>
     <div class="text-center py-10 font-mono">
       <h1 class="text-3xl font-[satisfy]">Login Now</h1>
     </div>
     <% if (error) { %>
-    <p class="text-center text-red-900 py-5"><%= error %></p>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    </script>
     <% } %>
-    <form action="/login" method="post" class="flex mb-2">
+
+    <form action="/login" method="post" class="flex">
       <div class="card w-full max-w-sm shadow-2xl m-auto">
         <div class="card-body">
           <div class="form-control">
@@ -23,6 +33,9 @@
             </label>
             <input type="password" placeholder="password" class="input border border-black bg-white" name="password" />
           </div>
+          <label for="">
+            <span class="text-sm">Dont have account? <a href="/register" class="text-blue-600">Register</a></span>
+          </label>
           <div class="form-control mt-6">
             <input class="btn bg-red-400 text-white border-none hover:bg-red-600" type="submit" value="Login" />
           </div>
