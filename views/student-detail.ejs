@@ -14,7 +14,29 @@
     <p><strong>Alamat:</strong> <%= student.UserProfile.address %></p>
     <p><strong>Nomor Telepon:</strong> <%= student.UserProfile.phone %></p>
 
-    <!-- nanti tambahin include Course di sini -->
+    <p><strong>Daftar Kelas yang Diikuti:</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Mata Pelajaran</th>
+          <th>Tanggal Kelas</th>
+          <th>Jadwal</th>
+          <th>Harga</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% student.Transactions.forEach(transaction => { %>
+          <tr>
+            <td><%= transaction.Course.name %></td>
+            <td><%= formatDate(transaction.Course.courseDate) %></td>
+            <td><%= transaction.Course.schedule %></td>
+            <td><%= formatCurrency(transaction.transactionCost) %></td>
+            <td><%= transaction.transactionStatus %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
 
     <a href="/student-list/<%= student.id %>/csv">Download CSV</a>
 
