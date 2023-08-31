@@ -1,5 +1,7 @@
 const {Course, Instructor, User, UserProfile} = require ('../models')
 const { Op } = require("sequelize");
+const formatDate = require('../helpers/format-date')
+const formatCurrency = require('../helpers/format-currency')
 
 class Student {
 
@@ -29,7 +31,7 @@ class Student {
             include: Instructor
         })
         .then(courses => {
-            res.render('course-all', {courses})
+            res.render('course-all', {courses, formatCurrency, formatDate})
         })
         .catch(err => {
             console.log(err)
@@ -44,7 +46,7 @@ class Student {
             include: Instructor
         })
         .then(course => {
-            res.render('course-detail', {course})
+            res.render('course-detail', {course, formatDate})
         })
         .catch(err => {
             console.log(err)
