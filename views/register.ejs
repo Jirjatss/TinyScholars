@@ -1,0 +1,42 @@
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body class="bg-white text-black">
+    <div class="navbar bg-red-400 text-white">
+      <a class="btn btn-ghost normal-case text-xl font-[satisfy]">TinyScholars</a>
+    </div>
+    <div class="text-center py-10 font-mono">
+      <h1 class="text-3xl font-[satisfy]">Login Now</h1>
+    </div>
+    <form action="/login" method="post" class="flex mb-2">
+      <div class="card w-full max-w-sm shadow-2xl m-auto">
+        <div class="card-body">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-black">Email</span>
+            </label>
+            <input type="text" placeholder="email" class="input border border-black bg-white" name="email" />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-black">Password</span>
+            </label>
+            <input type="text" placeholder="password" class="input border border-black bg-white" name="password" />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-black">Role</span>
+            </label>
+            <select name="role" class="select border border-black w-full max-w-xs bg-white">
+              <option disabled selected>Select Role</option>
+              <option value="Student">Student</option>
+              <option value="Parent">Parent</option>
+            </select>
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn bg-red-400 text-white border-none hover:bg-red-600">Login</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
