@@ -1,5 +1,7 @@
-const {User, UserProfile, Course} = require ('../models')
+const {User, UserProfile, Course, Transaction} = require ('../models')
 const csv = require('csv-express')
+const formatDate = require("../helpers/format-date");
+const formatCurrency = require("../helpers/format-currency");
 
 class Parent {
 
@@ -25,11 +27,15 @@ class Parent {
     const studentId = req.params.studentId
   
     User.findByPk(studentId, {
-      include: UserProfile
-      //nanti tambahin include Course di sini
+      include: [UserProfile, {
+        model: Transaction,
+        as: 'Transactions',
+        include: [Course]
+      }]
     })
       .then(student => {
-        res.render('student-detail', { student })
+        console.log(student);
+        res.render('student-detail', { student, formatDate, formatCurrency })
       })
       .catch(error => {
         console.log(error)
@@ -37,38 +43,33 @@ class Parent {
       })
   }
 
+
+
   static downloadStudentCSV(req, res) {
     const studentId = req.params.studentId
-
-    User.findOne({
-      where: {
-        id: studentId,
-        role: 'Student'
-      },
+  
+    User.findByPk(studentId, {
       include: [
         {
           model: UserProfile,
           as: 'UserProfile'
+        },
+        {
+          model: Transaction,
+          include: [Course]
         }
       ]
     })
       .then(student => {
-        if (!student || !student.UserProfile) {
-          return res.send('Student not found')
-        }
-
-        const csvData = [
-          {
-            FullName: student.UserProfile.fullName,
-            ImageUrl: student.UserProfile.imageUrl,
-            Address: student.UserProfile.address,
-            Gender: student.UserProfile.gender,
-            Phone: student.UserProfile.phone
-          }
-        ]
-
-        res.setHeader('Content-disposition', 'attachment; filename=student_profile.csv');
-        res.csv(csvData, true)
+        let csvData = 'FullName,ImageUrl,Address,Gender,Phone,CourseName,CourseDate,CourseSchedule,TransactionCost,TransactionStatus\n';
+  
+        student.Transactions.forEach(transaction => {
+          csvData += `${student.UserProfile.fullName},${student.UserProfile.imageUrl},${student.UserProfile.address},${student.UserProfile.gender},${student.UserProfile.phone},`
+          csvData += `${transaction.Course.name},${formatDate(transaction.transactionCourseDate)},${transaction.Course.schedule},${formatCurrency(transaction.transactionCost)},${transaction.transactionStatus}\n`
+        })
+  
+        res.setHeader('Content-disposition', 'attachment; filename=student_profile.csv')
+        res.send(csvData)
       })
       .catch(error => {
         console.log(error)
@@ -76,6 +77,10 @@ class Parent {
       })
   }
   
+  
+  
+  
+
   
 }
 module.exports = Parent;
