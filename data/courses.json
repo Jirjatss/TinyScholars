@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Matematika",
+    "description": "Matematika merupakan pelajaran yang berkaitan dengan angka, simbol, dan perhitungan. Tujuan pembelajaran agar mampu membuat pola pikir lebih terkonsep, menguasai nalar, dan sanggup menentukan pemecahan sebuah masalah yang ada di kehidupan sehari-hari.",
+    "duration": 240,
+    "courseDate":"2023-09-01",
+    "schedule": "Pagi",
+    "price": 100000
+  },
+  {
+    "name": "Matematika",
+    "description": "Matematika merupakan pelajaran yang berkaitan dengan angka, simbol, dan perhitungan. Tujuan pembelajaran agar mampu membuat pola pikir lebih terkonsep, menguasai nalar, dan sanggup menentukan pemecahan sebuah masalah yang ada di kehidupan sehari-hari.",
+    "duration": 240,
+    "courseDate":"2023-09-01",
+    "schedule": "Siang",
+    "price": 100000
+  },
+  {
+    "name": "Matematika",
+    "description": "Matematika merupakan pelajaran yang berkaitan dengan angka, simbol, dan perhitungan. Tujuan pembelajaran agar mampu membuat pola pikir lebih terkonsep, menguasai nalar, dan sanggup menentukan pemecahan sebuah masalah yang ada di kehidupan sehari-hari.",
+    "duration": 240,
+    "courseDate":"2023-09-01",
+    "schedule": "Malam",
+    "price": 100000
+  },
+  {
+    "name": "Ilmu Pengetahuan Alam",
+    "description": "IPA atau sains merupakan ilmu pengetahuan yang mempelajari mengenai alam semesta beserta isinya, serta peristiwa-peristiwa yang terjadi didalamnya yang dikembangkan oleh para ahli berdasarkan proses ilmiah.",
+    "duration": 180,
+    "courseDate":"2023-08-28",
+    "schedule": "Pagi",
+    "price": 80000
+  },
+  {
+    "name": "Ilmu Pengetahuan Alam",
+    "description": "IPA atau sains merupakan ilmu pengetahuan yang mempelajari mengenai alam semesta beserta isinya, serta peristiwa-peristiwa yang terjadi didalamnya yang dikembangkan oleh para ahli berdasarkan proses ilmiah.",
+    "duration": 180,
+    "courseDate":"2023-08-28",
+    "schedule": "Siang",
+    "price": 80000
+  },
+  {
+    "name": "Ilmu Pengetahuan Alam",
+    "description": "IPA atau sains merupakan ilmu pengetahuan yang mempelajari mengenai alam semesta beserta isinya, serta peristiwa-peristiwa yang terjadi didalamnya yang dikembangkan oleh para ahli berdasarkan proses ilmiah.",
+    "duration": 180,
+    "courseDate":"2023-08-28",
+    "schedule": "Malam",
+    "price": 80000
+  },
+  {
+    "name": "Ilmu Pengetahuan Sosial",
+    "description": "IPS merupakan mata pelajaran yang mempelajari kehidupan sosial yang didasarkan pada bahan kajian goegrafi, ekonomi, sejarah, antropologi, sosiologi dan tata negara dengan menampilkan permasalahan sehari-hari masyarakat.",
+    "duration": 180,
+    "courseDate":"2023-09-01",
+    "schedule": "Pagi",
+    "price": 80000
+  },
+  {
+    "name": "Ilmu Pengetahuan Sosial",
+    "description": "IPS merupakan mata pelajaran yang mempelajari kehidupan sosial yang didasarkan pada bahan kajian goegrafi, ekonomi, sejarah, antropologi, sosiologi dan tata negara dengan menampilkan permasalahan sehari-hari masyarakat.",
+    "duration": 180,
+    "courseDate":"2023-09-01",
+    "schedule": "Siang",
+    "price": 80000
+  },
+  {
+    "name": "Ilmu Pengetahuan Sosial",
+    "description": "IPS merupakan mata pelajaran yang mempelajari kehidupan sosial yang didasarkan pada bahan kajian goegrafi, ekonomi, sejarah, antropologi, sosiologi dan tata negara dengan menampilkan permasalahan sehari-hari masyarakat.",
+    "duration": 180,
+    "courseDate":"2023-09-01",
+    "schedule": "Malam",
+    "price": 80000
+  },
+  {
+    "name": "Pendidikan Pancasila dan Kewarganegaran",
+    "description": "Pendidikan Kewarganegaraan (PKn) adalah membawa misi pendidikan moral bangsa, membentuk warga negara yang cerdas, demokratis, dan berakhlak mulia, yang secara konsisten melestarikan dan mengembangkan cita-cita demokrasi dan membangun karakter bangsa.",
+    "duration": 60,
+    "courseDate":"2023-09-02",
+    "schedule": "Pagi",
+    "price": 50000
+  },
+  {
+    "name": "Pendidikan Pancasila dan Kewarganegaran",
+    "description": "Pendidikan Kewarganegaraan (PKn) adalah membawa misi pendidikan moral bangsa, membentuk warga negara yang cerdas, demokratis, dan berakhlak mulia, yang secara konsisten melestarikan dan mengembangkan cita-cita demokrasi dan membangun karakter bangsa.",
+    "duration": 60,
+    "courseDate":"2023-09-02",
+    "schedule": "Siang",
+    "price": 50000
+  },
+  {
+    "name": "Pendidikan Pancasila dan Kewarganegaran",
+    "description": "Pendidikan Kewarganegaraan (PKn) adalah membawa misi pendidikan moral bangsa, membentuk warga negara yang cerdas, demokratis, dan berakhlak mulia, yang secara konsisten melestarikan dan mengembangkan cita-cita demokrasi dan membangun karakter bangsa.",
+    "duration": 60,
+    "courseDate":"2023-09-02",
+    "schedule": "Malam",
+    "price": 50000
+  },
+  {
+    "name": "Bahasa Indonesia",
+    "description": "Pembelajaran bahasa Indonesia diarahkan untuk mengingkatkan kemampuan siswa untuk berkomunikasi dengan bahasa Indonesia baik secara lisan maupun tertulis.",
+    "duration": 900,
+    "courseDate":"2023-09-05",
+    "schedule": "Pagi",
+    "price": 100000
+  },
+  {
+    "name": "Bahasa Indonesia",
+    "description": "Pembelajaran bahasa Indonesia diarahkan untuk mengingkatkan kemampuan siswa untuk berkomunikasi dengan bahasa Indonesia baik secara lisan maupun tertulis.",
+    "duration": 900,
+    "courseDate":"2023-09-05",
+    "schedule": "Siang",
+    "price": 100000
+  },
+  {
+    "name": "Bahasa Indonesia",
+    "description": "Pembelajaran bahasa Indonesia diarahkan untuk mengingkatkan kemampuan siswa untuk berkomunikasi dengan bahasa Indonesia baik secara lisan maupun tertulis.",
+    "duration": 900,
+    "courseDate":"2023-09-05",
+    "schedule": "Malam",
+    "price": 100000
+  }
+]
