@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1><%= student.UserProfile.fullName %> Detail</h1>
+
+    <img src="<%= student.UserProfile.imageUrl %>" alt="<%= student.UserProfile.fullName %>" style="width: 100px; height: 100px;">
+    <p><strong>Full Name:</strong> <%= student.UserProfile.fullName %></p>
+    <p><strong>Address:</strong> <%= student.UserProfile.address %></p>
+    <p><strong>Gender:</strong> <%= student.UserProfile.gender %></p>
+
+    <!-- nanti tambahin include Course di sini -->
+
+    <a href="/student-list/<%= student.id %>/csv">Download CSV</a>
+
+
+  
+    <a href="/student-list">Back to Student List</a>
+  </body>
+  </html>

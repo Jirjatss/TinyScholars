@@ -47,6 +47,7 @@ router.get("/logout", AuthController.logout);
 router.get("/profile");
 router.get("/student-list/", isParent, Parent.viewStudentList);
 router.get("/student-list/:studentId", isParent, Parent.viewStudentDetail);
+router.get('/student-list/:studentId/csv', Parent.downloadStudentCSV);
 
 router.get("/course", isStudent, Student.viewCourse);
 router.get("/course/:courseId/detail", isStudent, Student.viewCourseDetail);
