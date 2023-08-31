@@ -1,0 +1,46 @@
+<!-- course-detail.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Mata Pelajaran <%= course.name %></title>
+</head>
+<body>
+    <h1>Detail Mata Pelajaran <%= course.name %></h1>
+
+    <table>
+        <tr>
+            <th>Mata Pelajaran</th>
+            <td><%= course.name %></td>
+        </tr>
+        <tr>
+            <th>Deskripsi</th>
+            <td><%= course.description %></td>
+        </tr>
+        <tr>
+            <th>Tanggal Mulai</th>
+            <td><%= course.courseDate %></td>
+        </tr>
+        <tr>
+            <th>Durasi</th>
+            <td><%= course.duration %></td>
+        </tr>
+        <tr>
+            <th>Harga</th>
+            <td><%= course.price %></td>
+        </tr>
+        <tr>
+            <th>Instructor</th>
+            <td>
+                <% course.Instructors.forEach((instructor) => { %>
+                    <%= instructor.name %><br> - Kelas <%= instructor.schedule %><br>
+                <% }) %>
+            </td>
+        </tr>>
+        
+    </table>
+    <a href="/course">Kembali ke List Pelajaran</a>
+</body>
+</html>
