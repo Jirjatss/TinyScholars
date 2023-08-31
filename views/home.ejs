@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('./partials/head') %>
   <body>
-    <% if (userRole) { %> <%- include('./partials/navbar', {userRole}) %> <% }else { %> <%- include('./partials/navbar') %> <% } %> <% if (error) { %>
+    <% if (userRole) { %> <%- include('./partials/navbar', {userRole, userId, userImage}) %> <% }else { %> <%- include('./partials/navbar') %> <% } %> <% if (error) { %>
     <script>
       const alertMessage = "<%= error %>";
       Swal.fire({

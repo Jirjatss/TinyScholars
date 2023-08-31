@@ -3,7 +3,7 @@
   <body class="bg-white text-black">
     <%- include('../partials/navbar', {userRole}) %>
     <div class="mx-24">
-      <h1 class="text-3xl font-mono text-center font-semibold py-10">Transaction <%= student.UserProfile ? `${student.UserProfile.fullName}` : `${student.email}` %></h1>
+      <h1 class="text-3xl font-mono text-center font-semibold py-10">Transaction <%= student.UserProfile.fullName %> %></h1>
       <div class="overflow-x-auto mx-44">
         <table class="table">
           <thead>
