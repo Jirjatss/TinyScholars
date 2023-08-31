@@ -47,7 +47,7 @@ router.get("/logout", AuthController.logout);
 router.get("/profile");
 router.get("/student-list/", isParent, Parent.viewStudentList);
 router.get("/student-list/:studentId", isParent, Parent.viewStudentDetail);
-router.get('/student-list/:studentId/csv', Parent.downloadStudentCSV);
+router.get("/student-list/:studentId/csv", Parent.downloadStudentCSV);
 
 router.get("/course", isStudent, Student.viewCourse);
 router.get("/course/:courseId/detail", isStudent, Student.viewCourseDetail);
@@ -58,6 +58,8 @@ router.get("/profile/:studentId/", isStudent, Student.viewStudentProfile);
 router.post("/profile/:studentId/add", isStudent, Student.submitProfile);
 
 router.get("/transaction/:studentId/", isStudent, Student.viewPurchasedCourse);
+router.get("/transaction/:studentId/attend/:transactionId", isStudent, Student.attend);
+router.get("/transaction/:studentId/cancel/:transactionId", isStudent, Student.cancel);
 router.get("/transaction/:studentId/delete/:courseId", isStudent, Student.deleteCourse);
 
 module.exports = router;
