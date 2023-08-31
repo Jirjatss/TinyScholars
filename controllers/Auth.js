@@ -1,10 +1,11 @@
-const session = require("express-session");
 const { User } = require("../models");
 let bcrypt = require("bcryptjs");
 
 class AuthController {
   static home(req, res) {
-    res.render("home");
+    const { error } = req.query;
+    const { userRole } = req.session;
+    res.render("home", { error, userRole });
   }
   static login(req, res) {
     const { error } = req.query;
@@ -23,7 +24,7 @@ class AuthController {
           let isValUser = bcrypt.compareSync(password, user.password);
           if (isValUser) {
             req.session.userId = user.id;
-            req, (session.userRole = user.role);
+            req.session.userRole = user.role;
             return res.redirect("/");
           } else {
             let errors = "Email/Password not match!";
@@ -40,7 +41,8 @@ class AuthController {
       });
   }
   static register(req, res) {
-    res.render("register");
+    const { error } = req.query;
+    res.render("register", { error });
   }
   static postRegister(req, res) {
     const { email, password, role } = req.body;
@@ -48,7 +50,14 @@ class AuthController {
       .then((_) => {
         res.redirect("/");
       })
-      .catch((err) => res.send(err));
+      .catch((err) => {
+        if (err.name === "SequelizeValidationError") {
+          let errors = err.errors.map((e) => {
+            return e.message;
+          });
+          res.redirect(`/register?error=${errors}`);
+        }
+      });
   }
 }
 module.exports = AuthController;

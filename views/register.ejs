@@ -5,6 +5,18 @@
     <div class="text-center py-10 font-mono">
       <h1 class="text-3xl font-[satisfy]">Register Now</h1>
     </div>
+    <% if (error) { %>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    </script>
+    <% } %>
     <form action="/register" method="post" class="flex">
       <div class="card w-full max-w-sm shadow-2xl m-auto">
         <div class="card-body">
