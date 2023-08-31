@@ -1,11 +1,23 @@
 <html lang="en">
   <%- include('./partials/head') %>
-  <body class="bg-white text-black">
+  <body class="bg-white text-black pb-5">
     <%- include('./partials/navbar') %>
     <div class="text-center py-10 font-mono">
       <h1 class="text-3xl font-[satisfy]">Register Now</h1>
     </div>
-    <form action="/register" method="post" class="flex mb-2">
+    <% if (error) { %>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    </script>
+    <% } %>
+    <form action="/register" method="post" class="flex">
       <div class="card w-full max-w-sm shadow-2xl m-auto">
         <div class="card-body">
           <div class="form-control">
@@ -30,6 +42,9 @@
               <option value="Parent">Parent</option>
             </select>
           </div>
+          <label for="">
+            <span class="text-sm">Already have account? <a href="/login" class="text-blue-600">Login</a></span>
+          </label>
           <div class="form-control mt-6">
             <input class="btn bg-red-400 text-white border-none hover:bg-red-600" type="submit" value="Register" />
           </div>

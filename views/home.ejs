@@ -1,15 +1,32 @@
 <html lang="en">
   <%- include('./partials/head') %>
   <body>
-    <div class="hero min-h-screen bg-base-200">
+    <%- include('./partials/navbar') %> <% if (error) { %>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    </script>
+    <% } %>
+    <div class="hero min-h-screen bg-white text-black">
       <div class="hero-content flex-col lg:flex-row">
-        <img src="https://media.licdn.com/dms/image/C5603AQHbHWmU7kl-nQ/profile-displayphoto-shrink_800_800/0/1640066099868?e=2147483647&v=beta&t=JIwXN1ZSXGcBqMzTJLRKRB8NCbsl_-mwI5hvO_Evd6E" class="max-w-sm rounded-lg shadow-2xl" />
-        <div>
-          <h1 class="text-5xl font-bold">TinyScholars</h1>
+        <div class="ms-5">
+          <h1 class="text-7xl font-bold font-[satisfy]">TinyScholars</h1>
           <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
           <div class="flex">
+            <% if (!userRole) { %>
             <a href="/login" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">Login</a>
             <a href="/register" class="px-3 py-1.5 bg-red-500 rounded-lg text-white">Register</a>
+            <% } else if (userRole === 'Parent') { %>
+            <a href="/student-list" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Students</a>
+            <% } else if (userRole === 'Student') { %>
+            <a href="/course" class="px-3 py-1.5 bg-red-500 rounded-lg text-white me-2">View Courses</a>
+            <% } %>
           </div>
         </div>
       </div>
