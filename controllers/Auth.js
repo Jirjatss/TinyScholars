@@ -24,11 +24,8 @@ class AuthController {
           let isValUser = bcrypt.compareSync(password, user.password);
           if (isValUser) {
             req.session.userId = user.id;
-
             req.session.userRole = user.role;
-            return res.redirect("/");
-
-
+            return res.redirect("/")
           } else {
             let errors = "Email/Password not match!";
             return res.redirect(`/login?error=${errors}`);
