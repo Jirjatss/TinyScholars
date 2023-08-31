@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Siswa</title>
+    <title>Profil <%= userProfile.getGreeting() %></title>
 </head>
 <body>
-    <h1>Profil Siswa</h1>
+    <h1>Profil <%= userProfile.getGreeting() %></h1>
+    
+    <p><img src="<%= userProfile.imageUrl %>" style="width: 200px; height: 200px;"></p>
     <p><strong>Nama Lengkap:</strong> <%= userProfile.fullName %></p>
-    <p><strong>Foto:</strong> <img src="<%= userProfile.imageUrl %>" alt="Profile Image"></p>
     <p><strong>Alamat:</strong> <%= userProfile.address %></p>
     <p><strong>Jenis Kelamin:</strong> <%= userProfile.gender %></p>
     <p><strong>Nomor Telepon:</strong> <%= userProfile.phone %></p>
