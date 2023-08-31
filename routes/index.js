@@ -42,7 +42,6 @@ router.get("/course/:courseId/book", Student.bookCourseForm);
 router.post("/course/:courseId/book", Student.submitCourse);
 
 router.get("/profile/:studentId/", Student.viewStudentProfile);
-router.get("/profile/:studentId/add", Student.profileForm);
 router.post("/profile/:studentId/add", Student.submitProfile);
 
 router.get("/transaction/:studentId/", Student.viewPurchasedCourse);
