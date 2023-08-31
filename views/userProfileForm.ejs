@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body class="bg-white text-black">
+    <div class="h-screen">
+      <div class="text-center py-10 font-mono">
+        <h1 class="text-3xl font-[satisfy]">Lengkapi Profile</h1>
+      </div>
+
+      <form action="/profile/<%= userId %>/add" method="POST" class="flex">
+        <div class="card w-[640px] shadow-2xl m-auto">
+          <div class="card-body font-bold">
+            <div class="grid grid-cols-2 gap-x-2">
+              <div class="form-control">
+                <label for="fullName" class="label">
+                  <span class="label-text text-black">Nama Lengkap</span>
+                </label>
+                <input type="text" name="fullName" class="input border border-black bg-white" />
+              </div>
+              <div class="form-control">
+                <label for="imageUrl" class="label">
+                  <span class="label-text text-black">Photo</span>
+                </label>
+                <input type="text" id="imageUrl" name="imageUrl" class="input border border-black bg-white" />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-x-2">
+              <div class="form-control">
+                <label for="alamat" class="label">
+                  <span class="label-text text-black">Alamat</span>
+                </label>
+                <input type="text" name="address" class="input border border-black bg-white" />
+              </div>
+              <div class="form-control">
+                <label for="alamat" class="label">
+                  <span class="label-text text-black">Phone</span>
+                </label>
+                <input type="number" name="phone" class="input border border-black bg-white" />
+              </div>
+            </div>
+            <div class="form-control">
+              <label for="alamat" class="label">
+                <span class="label-text text-black">Gender</span>
+              </label>
+              <select name="gender" id="" class="input bg-white border border-black">
+                <option disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="form-control mt-6">
+              <input class="btn bg-red-400 text-white border-none hover:bg-red-600" type="submit" value="Save" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+
+<!-- <label for="address">Alamat:</label>
+<input type="text" id="address" name="address" required /><br />
+<label for="gender">Jenis Kelamin:</label>
+<input type="text" id="gender" name="gender" required /><br />
+<label for="phone">Nomor Telepon:</label>
+<input type="number" id="phone" name="phone" required /><br /> -->

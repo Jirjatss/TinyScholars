@@ -6,7 +6,7 @@ const formatCurrency = require("../helpers/format-currency");
 class Student {
   static viewCourse(req, res) {
     const { search, schedule, sort, error } = req.query;
-    const { userRole } = req.session;
+    const { userRole, userImage, userId } = req.session;
 
     let whereOptions = {};
     if (search) {
@@ -29,7 +29,7 @@ class Student {
       include: Instructor,
     })
       .then((courses) => {
-        res.render("course-all", { courses, error, userRole, formatDate, formatCurrency });
+        res.render("course-all", { courses, error, userRole, formatDate, formatCurrency, userImage, userId });
       })
       .catch((err) => {
         console.log(err);
@@ -92,17 +92,26 @@ class Student {
     res.send("submitCourse");
   }
 
-  static viewStudentProfile(req, res) {
-    const studentId = req.params.studentId;
+  static viewProfile(req, res) {
+    const { userId } = req.session;
     UserProfile.findOne({
-      where: { UserId: studentId },
+      where: { UserId: userId },
     })
-      .then((userProfile) => {
-        if (userProfile) {
-          res.render("student-profile", { userProfile });
-        } else {
-          res.render("student-profile-form", { studentId });
-        }
+      .then((profile) => {
+        res.render("userProfile", { userProfile: profile });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      });
+  }
+  static profileForm(req, res) {
+    const { userId } = req.session;
+    UserProfile.findOne({
+      where: { UserId: userId },
+    })
+      .then(() => {
+        res.render("userProfileForm", { userId });
       })
       .catch((err) => {
         console.log(err);
@@ -111,7 +120,7 @@ class Student {
   }
 
   static submitProfile(req, res) {
-    const studentId = req.params.studentId;
+    const { userId } = req.session;
     const { fullName, imageUrl, address, gender, phone } = req.body;
 
     UserProfile.create({
@@ -120,10 +129,10 @@ class Student {
       address: address,
       gender: gender,
       phone: phone,
-      UserId: studentId,
+      UserId: userId,
     })
       .then(() => {
-        res.redirect(`/profile/${studentId}`);
+        res.redirect(`/profile/${userId}`);
       })
       .catch((err) => {
         console.log(err);
@@ -132,12 +141,12 @@ class Student {
   }
 
   static viewPurchasedCourse(req, res) {
-    const { userRole, userId } = req.session;
+    const { userRole, userId, userImage } = req.session;
     User.findByPk(userId, {
       include: [Transaction, UserProfile],
     })
       .then((student) => {
-        res.render("./student/transactions", { userRole, student, formatDate, formatCurrency });
+        res.render("./student/transactions", { userRole, student, formatDate, formatCurrency, userImage, userId });
       })
       .catch((err) => {
         console.log(err);

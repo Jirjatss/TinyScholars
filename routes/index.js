@@ -44,7 +44,7 @@ const isStudent = function (req, res, next) {
   }
 };
 router.get("/logout", AuthController.logout);
-router.get("/profile");
+
 router.get("/student-list/", isParent, Parent.viewStudentList);
 router.get("/student-list/:studentId", isParent, Parent.viewStudentDetail);
 router.get("/student-list/:studentId/csv", Parent.downloadStudentCSV);
@@ -54,8 +54,9 @@ router.get("/course/:courseId/detail", isStudent, Student.viewCourseDetail);
 router.get("/course/:courseId/book", isStudent, Student.bookCourseForm);
 router.post("/course/:courseId/book", isStudent, Student.submitCourse);
 
-router.get("/profile/:studentId/", isStudent, Student.viewStudentProfile);
-router.post("/profile/:studentId/add", isStudent, Student.submitProfile);
+router.get("/profile/:id", isLogin, Student.viewProfile);
+router.get("/profile/:id/add", isLogin, Student.profileForm);
+router.post("/profile/:id/add", isLogin, Student.submitProfile);
 
 router.get("/transaction/:studentId/", isStudent, Student.viewPurchasedCourse);
 router.get("/transaction/:studentId/attend/:transactionId", isStudent, Student.attend);

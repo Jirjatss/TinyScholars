@@ -1,11 +1,11 @@
-const { User } = require("../models");
+const { User, UserProfile } = require("../models");
 let bcrypt = require("bcryptjs");
 
 class AuthController {
   static home(req, res) {
     const { error } = req.query;
-    const { userRole, userId } = req.session;
-    res.render("home", { error, userRole, userId });
+    const { userRole, userId, userImage } = req.session;
+    res.render("home", { error, userRole, userId, userImage });
   }
   static login(req, res) {
     const { error } = req.query;
@@ -14,6 +14,8 @@ class AuthController {
 
   static postLogin(req, res) {
     const { email, password } = req.body;
+    let userId = 0;
+    let userPassword = "";
     User.findOne({
       where: {
         email: email,
@@ -21,18 +23,33 @@ class AuthController {
     })
       .then((user) => {
         if (user) {
-          let isValUser = bcrypt.compareSync(password, user.password);
+          userPassword = user.password;
+          userId = user.id;
+          console.log(userId);
+          req.session.userId = user.id;
+          req.session.userRole = user.role;
+          return UserProfile.findOne({
+            where: {
+              UserId: user.id,
+            },
+          });
+        } else {
+          let errors = "Email/Password not match!";
+          return res.redirect(`/login?error=${errors}`);
+        }
+      })
+      .then((result) => {
+        if (result) {
+          req.session.userImage = result.imageUrl;
+          let isValUser = bcrypt.compareSync(password, userPassword);
           if (isValUser) {
-            req.session.userId = user.id;
-            req.session.userRole = user.role;
-            return res.redirect("/");
+            res.redirect("/");
           } else {
             let errors = "Email/Password not match!";
             return res.redirect(`/login?error=${errors}`);
           }
         } else {
-          let errors = "Email/Password not match!";
-          return res.redirect(`/login?error=${errors}`);
+          return res.redirect(`/profile/${userId}/add`);
         }
       })
       .catch((err) => {
