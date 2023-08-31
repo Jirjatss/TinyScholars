@@ -25,7 +25,7 @@ class AuthController {
           if (isValUser) {
             req.session.userId = user.id;
             req.session.userRole = user.role;
-            return res.redirect("/")
+            return res.redirect("/");
           } else {
             let errors = "Email/Password not match!";
             return res.redirect(`/login?error=${errors}`);
@@ -58,6 +58,15 @@ class AuthController {
           res.redirect(`/register?error=${errors}`);
         }
       });
+  }
+  static logout(req, res) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.redirect("/login");
+      }
+    });
   }
 }
 module.exports = AuthController;

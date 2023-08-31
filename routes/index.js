@@ -13,21 +13,28 @@ router.get("/login", AuthController.login);
 router.post("/login", AuthController.postLogin);
 router.get("/register", AuthController.register);
 router.post("/register", AuthController.postRegister);
-router.use(function (req, res, next) {
-  console.log(req.session);
+
+const isLogin = function (req, res, next) {
+  if (req.session.userId) {
+    next();
+  } else {
+    Swal.fire("The Internet?", "That thing is still around?", "question");
+    let error = "Salah Bos";
+    res.redirect(`/login?error=${error}`);
+  }
+};
+
+const isParent = function (req, res, next) {
   if (req.session.userId && req.session.userRole === "Parent") {
     next();
   } else {
     Swal.fire("The Internet?", "That thing is still around?", "question");
-    let error = "Login First";
+    let error = "Salah Bos";
     res.redirect(`/login?error=${error}`);
   }
-});
+};
 
-router.get("/student-list/", Parent.viewStudentList);
-router.get("/student-list/:studentId", Parent.viewStudentDetail);
-
-router.use(function (req, res, next) {
+const isStudent = function (req, res, next) {
   if (req.session.userId && req.session.userRole === "Student") {
     next();
   } else {
@@ -35,16 +42,21 @@ router.use(function (req, res, next) {
     let error = "Role kamu tidak sesuai";
     res.redirect(`/?error=${error}`);
   }
-});
-router.get("/course", Student.viewCourse);
-router.get("/course/:courseId/detail", Student.viewCourseDetail);
-router.get("/course/:courseId/book", Student.bookCourseForm);
-router.post("/course/:courseId/book", Student.submitCourse);
+};
+router.get("/logout", AuthController.logout);
+router.get("/profile");
+router.get("/student-list/", isParent, Parent.viewStudentList);
+router.get("/student-list/:studentId", isParent, Parent.viewStudentDetail);
 
-router.get("/profile/:studentId/", Student.viewStudentProfile);
-router.post("/profile/:studentId/add", Student.submitProfile);
+router.get("/course", isStudent, Student.viewCourse);
+router.get("/course/:courseId/detail", isStudent, Student.viewCourseDetail);
+router.get("/course/:courseId/book", isStudent, Student.bookCourseForm);
+router.post("/course/:courseId/book", isStudent, Student.submitCourse);
 
-router.get("/transaction/:studentId/", Student.viewPurchasedCourse);
-router.get("/transaction/:studentId/delete/:courseId", Student.deleteCourse);
+router.get("/profile/:studentId/", isStudent, Student.viewStudentProfile);
+router.post("/profile/:studentId/add", isStudent, Student.submitProfile);
+
+router.get("/transaction/:studentId/", isStudent, Student.viewPurchasedCourse);
+router.get("/transaction/:studentId/delete/:courseId", isStudent, Student.deleteCourse);
 
 module.exports = router;
