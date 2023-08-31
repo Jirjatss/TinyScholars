@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyScholars | Mata Pelajaran</title>
+</head>
+<body>
+    <h1>TinyScholars | Mata Pelajaran</h1>
+    <form action="/course" method="GET">
+        <input type="text" name="search" placeholder="Cari Pelajaran">
+        <select name="schedule">
+            <option value="">Semua Jadwal</option>
+            <option value="Pagi">Pagi</option>
+            <option value="Siang">Siang</option>
+            <option value="Malam">Malam</option>
+        </select>
+        <button type="submit">Cari Kelas</button>
+    </form>
+    
+    <a href="/course?sort=asc">Urutkan dari Harga Termurah</a>
+    <a href="/course?sort=desc">Urutkan dari Harga Termahal</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Pelajaran</th>
+                <th>Tanggal Mulai</th>
+                <th>Waktu</th>
+                <th>Harga</th>
+                <th>Instruktur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% courses.forEach((course, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= course.name %></td>
+                    <td><%= course.courseDate %></td>
+                    <td><%= course.schedule %></td>
+                    <td><%= course.price %></td>
+                    <td>
+                        <% course.Instructors.forEach((instructor) => { %>
+                            <%= instructor.name %><br>
+                        <% }) %>
+                    </td>
+                    <td>
+                        <a href="/course/<%= course.id %>/detail">Lihat Detail</a>
+                        <a href="/course/<%= course.id %>/book">Beli</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/">Kembali ke Home</a>
+</body>
+</html>
