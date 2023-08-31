@@ -1,9 +1,20 @@
-const {Course, Instructor, User, UserProfile} = require ('../models')
+const {User} = require ('../models')
 
 class Parent {
 
   static viewStudentList(req, res) {
-    res.send("viewStudentList");
+    User.findAll({
+      where: {
+          role: 'student'
+      }
+    })
+    .then(students => {
+        res.render('student-list', { students });
+    })
+    .catch(error => {
+        console.error(error);
+        res.send('Error fetching student list');
+    });
   }
   static viewStudentDetail(req, res) {
     res.send("viewStudentDetail");
