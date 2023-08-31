@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 
 class Student {
 
+
     static viewCourse(req, res) {
         const { search, schedule, sort } = req.query
     
@@ -37,42 +38,77 @@ class Student {
     }
     
 
-  static viewCourseDetail(req, res) {
-    const courseId = req.params.courseId
-    Course.findByPk(courseId, {
-        include: Instructor
-    })
-    .then(course => {
-        res.render('course-detail', {course})
-    })
-    .catch(err => {
-        console.log(err)
-        res.send(err)
-    })
-}
+    static viewCourseDetail(req, res) {
+        const courseId = req.params.courseId
+        Course.findByPk(courseId, {
+            include: Instructor
+        })
+        .then(course => {
+            res.render('course-detail', {course})
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
+    }
 
 
-  static bookCourseForm(req, res) {
-    res.send("bookCourseForm");
-  }
-  static submitCourse(req, res) {
-    res.send("submitCourse");
-  }
-  static viewStudentProfile(req, res) {
-    res.send("viewStudentProfile");
-  }
-  static profileForm(req, res) {
-    res.send("profileForm");
-  }
-  static submitProfile(req, res) {
-    res.send("submitProfile");
-  }
-  static viewPurchasedCourse(req, res) {
-    res.send("viewPurchasedCourse");
-  }
-  static deleteCourse(req, res) {
-    res.send("deleteCourse");
-  }
+    static bookCourseForm(req, res) {
+        res.send("bookCourseForm");
+    }
+
+    static submitCourse(req, res) {
+        res.send("submitCourse");
+    }
+
+    static viewStudentProfile(req, res) {
+        const studentId = req.params.studentId
+        UserProfile.findOne({
+          where: { UserId: studentId }
+        })
+          .then(userProfile => {
+            if (userProfile) {
+              res.render('student-profile', { userProfile })
+            } else {
+              res.render('student-profile-form', { studentId })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+            res.send(err)
+          })
+      }
+
+
+    static submitProfile(req, res) {
+        const studentId = req.params.studentId
+        const { fullName, imageUrl, address, gender, phone } = req.body
+    
+        UserProfile.create({
+            fullName: fullName,
+            imageUrl: imageUrl,
+            address: address,
+            gender: gender,
+            phone: phone,
+            UserId: studentId
+        })
+        .then(() => {
+            res.redirect(`/profile/${studentId}`)
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
+    }
+    
+
+    static viewPurchasedCourse(req, res) {
+        res.send("viewPurchasedCourse");
+    }
+
+    static deleteCourse(req, res) {
+        res.send("deleteCourse");
+    }
 
 }
 module.exports = Student;
