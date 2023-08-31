@@ -3,9 +3,12 @@
   <body class="bg-white text-black">
     <%- include('./partials/navbar') %>
     <div class="text-center py-10 font-mono">
-      <h1 class="text-3xl font-[satisfy]">Register Now</h1>
+      <h1 class="text-3xl font-[satisfy]">Login Now</h1>
     </div>
-    <form action="/register" method="post" class="flex mb-2">
+    <% if (error) { %>
+    <p class="text-center text-red-900 py-5"><%= error %></p>
+    <% } %>
+    <form action="/login" method="post" class="flex mb-2">
       <div class="card w-full max-w-sm shadow-2xl m-auto">
         <div class="card-body">
           <div class="form-control">
@@ -20,18 +23,8 @@
             </label>
             <input type="password" placeholder="password" class="input border border-black bg-white" name="password" />
           </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text text-black">Role</span>
-            </label>
-            <select name="role" class="select border border-black w-full max-w-xs bg-white">
-              <option disabled selected>Select Role</option>
-              <option value="Student">Student</option>
-              <option value="Parent">Parent</option>
-            </select>
-          </div>
           <div class="form-control mt-6">
-            <input class="btn bg-red-400 text-white border-none hover:bg-red-600" type="submit" value="Register" />
+            <input class="btn bg-red-400 text-white border-none hover:bg-red-600" type="submit" value="Login" />
           </div>
         </div>
       </div>
