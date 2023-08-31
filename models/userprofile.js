@@ -10,6 +10,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       UserProfile.belongsTo(models.User);
     }
+
+    getGreeting() {
+        if (this.gender === 'Male') {
+          return `Siswa ${this.fullName}`
+        } else if (this.gender === 'Female') {
+          return `Siswi ${this.fullName}`
+        } else {
+          return ''
+        }
+    }
+
   }
   UserProfile.init(
     {

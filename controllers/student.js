@@ -5,7 +5,6 @@ const formatCurrency = require('../helpers/format-currency')
 
 class Student {
 
-
     static viewCourse(req, res) {
         const { search, schedule, sort } = req.query
     
