@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Course.hasMany(models.Instructor);
+      Course.hasMany(models.Transaction);
     }
   }
   Course.init(
