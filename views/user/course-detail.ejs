@@ -1,0 +1,43 @@
+<!-- course-detail.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body class="bg-white text-black h-screen">
+    <%- include('../partials/navbar', {userId, userRole, userImage}) %>
+    <div class="mx-24 bg-white">
+      <h1 class="text-4xl font-mono text-center font-semibold py-10"><%= course.name %> Detail</h1>
+      <div class="flex mx-24 mt-10 space-x-10">
+        <div class="">
+          <p class="text-center"><b>Instructors</b></p>
+          <div class="grid grid-cols-2 gap-x-3">
+            <% course.Instructors.forEach((instructor) => { %>
+            <div>
+              <img src="<%= instructor.imageUrl %>" alt="instructor.name" class="w-96 h-36" />
+              <p class="text-center"><%= instructor.name %> <br /><%= instructor.schedule %></p>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="overflow-x-auto m-auto">
+          <p>
+            <b>Course :</b>
+            <%= course.name %>
+          </p>
+          <p>
+            <b>Description :</b> <br />
+            <%= course.description %>
+          </p>
+          <p>
+            <b>Start Date :</b>
+            <%= formatDate(course.courseDate) %>
+          </p>
+          <p><b>Duration :</b> <%= course.duration %> Minutes</p>
+          <p>
+            <b>Price :</b>
+            <%= formatCurrency(course.price )%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

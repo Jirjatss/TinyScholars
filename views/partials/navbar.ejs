@@ -1,6 +1,6 @@
 <div class="navbar bg-red-400 text-white px-8">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl" href="/">daisyUI</a>
+    <a class="btn btn-ghost normal-case text-xl font-[satisfy]" href="/">TinyScholars</a>
   </div>
   <div class="flex-none">
     <% if (userRole) { %>
@@ -10,14 +10,29 @@
           <img src="<%= userImage  %>" />
         </div>
       </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-red-400 text-white rounded-box w-52">
         <li>
           <a class="justify-between" href="/profile/<%= userId %>">
             Profile
-            <span class="badge">New</span>
+            <span class="badge bg-white border-none text-black">New</span>
           </a>
         </li>
-        <li><a href="/logout">Logout</a></li>
+        <% if (userRole === "Student") { %>
+        <li>
+          <a href="/course">Courses</a>
+        </li>
+        <li>
+          <a href="/transaction/<%= userId %>">Transactions</a>
+        </li>
+
+        <% }else { %>
+        <li>
+          <a href="/student-list">Student List</a>
+        </li>
+        <% } %>
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
       </ul>
     </div>
     <% } else { %>

@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./partials/head') %>
+  <%- include('../partials/head') %>
   <body class="bg-white text-black">
+    <% if (error) { %>
+    <script>
+      const alertMessage = "<%= error %>";
+      Swal.fire({
+        title: "Error!",
+        html: `<p class="text-red-500 font-semibold">${alertMessage}</p>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    </script>
+    <% } %>
     <div class="h-screen">
       <div class="text-center py-10 font-mono">
-        <h1 class="text-3xl font-[satisfy]">Lengkapi Profile</h1>
+        <h1 class="text-3xl font-[satisfy]">Complete Profile</h1>
       </div>
-
       <form action="/profile/<%= userId %>/add" method="POST" class="flex">
         <div class="card w-[640px] shadow-2xl m-auto">
           <div class="card-body font-bold">
             <div class="grid grid-cols-2 gap-x-2">
               <div class="form-control">
                 <label for="fullName" class="label">
-                  <span class="label-text text-black">Nama Lengkap</span>
+                  <span class="label-text text-black">Full Name</span>
                 </label>
-                <input type="text" name="fullName" class="input border border-black bg-white" />
+                <input type="text" name="fullName" class="input border border-black bg-white font-thin" />
               </div>
               <div class="form-control">
                 <label for="imageUrl" class="label">
-                  <span class="label-text text-black">Photo</span>
+                  <span class="label-text text-black">Image Url</span>
                 </label>
-                <input type="text" id="imageUrl" name="imageUrl" class="input border border-black bg-white" />
+                <input type="text" id="imageUrl" name="imageUrl" class="input border border-black bg-white font-thin" />
               </div>
             </div>
             <div class="grid grid-cols-2 gap-x-2">
               <div class="form-control">
                 <label for="alamat" class="label">
-                  <span class="label-text text-black">Alamat</span>
+                  <span class="label-text text-black">Address</span>
                 </label>
-                <input type="text" name="address" class="input border border-black bg-white" />
+                <input type="text" name="address" class="input border border-black bg-white font-thin" />
               </div>
               <div class="form-control">
                 <label for="alamat" class="label">
                   <span class="label-text text-black">Phone</span>
                 </label>
-                <input type="number" name="phone" class="input border border-black bg-white" />
+                <input type="number" name="phone" class="input border border-black bg-white font-thin" />
               </div>
             </div>
             <div class="form-control">
               <label for="alamat" class="label">
                 <span class="label-text text-black">Gender</span>
               </label>
-              <select name="gender" id="" class="input bg-white border border-black">
+              <select name="gender" id="" class="input bg-white border border-black font-thin">
                 <option disabled selected>Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
