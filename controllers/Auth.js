@@ -1,5 +1,7 @@
+const session = require("express-session");
 const { User } = require("../models");
 let bcrypt = require("bcryptjs");
+
 class AuthController {
   static home(req, res) {
     res.render("home");
@@ -19,8 +21,9 @@ class AuthController {
       .then((user) => {
         if (user) {
           let isValUser = bcrypt.compareSync(password, user.password);
-          console.log(isValUser);
           if (isValUser) {
+            req.session.userId = user.id;
+            req, (session.userRole = user.role);
             return res.redirect("/");
           } else {
             let errors = "Email/Password not match!";
@@ -36,7 +39,6 @@ class AuthController {
         res.send(err);
       });
   }
-
   static register(req, res) {
     res.render("register");
   }
